@@ -17,6 +17,6 @@ This project implements a modular and extensible emergency center management sys
 - **Simulation Mode:** The system includes functionality to simulate the operations of the emergency center for testing purposes.
 - **Scalable Grouping:** The Composite pattern allows flexible sensor management at different levels, from individual sensors to entire buildings.
 
-## uml diagram with Strategy and Composite Pattern Used
+## UML Diagram With Strategy and Composite Pattern Used
 
 ![Detailed UML Diagram](detailed_uml.png)
