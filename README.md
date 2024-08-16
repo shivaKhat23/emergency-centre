@@ -1,4 +1,4 @@
-# Emergency Center Management System
+# Emergency Centre Management System
 
 ## Overview
 
