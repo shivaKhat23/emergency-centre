@@ -1,0 +1,95 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+interface Action << interface >> {
+  + performAction(): void
+}
+class CallFireBrigade {
+  + performAction(): void
+}
+class CallPolice {
+  + performAction(): void
+}
+interface Component << interface >> {
+  + execute(): void
+}
+class Composite {
+  - name: String
+  - children: List<Component>
+  - level: Level
+  + add(List<Component>): void
+  + execute(): void
+  + add(Component): void
+  + remove(Component): void
+  + getAllSensors(): List<Sensor>
+  + getChildren(): List<Component>
+}
+class Evacuate {
+  + performAction(): void
+}
+enum GasType << enumeration >> {
+  + CARBON_MONOXIDE: 
+  + CHLORINE: 
+  + AMMONIA: 
+  + values(): GasType[]
+  + valueOf(String): GasType
+}
+enum Level << enumeration >> {
+  + ROOM: 
+  + FLOOR: 
+  + BUILDING: 
+  + values(): Level[]
+  + valueOf(String): Level
+}
+class MotionSensor {
+  - minDistance: Integer
+  - maxDistance: Integer
+}
+class Sensor {
+  - vendor: Vendor
+  - actions: List<Action>
+  - id: Integer
+  + getVendor(): Vendor
+  + addAction(Action): void
+  + printInfo(): void
+  + setActions(List<Action>): void
+  + execute(): void
+  + getId(): Integer
+  + getActions(): List<Action>
+  + removeAction(Action): void
+}
+class SmokeSensor {
+  - sensitivity: Double
+}
+class ToxicGasSensor {
+  - concentration: Double
+  - gasType: GasType
+}
+enum Vendor << enumeration >> {
+  + VENDOR2: 
+  + VENDOR4: 
+  - name: String
+  + VENDOR1: 
+  + VENDOR3: 
+  + valueOf(String): Vendor
+  + getName(): String
+  + values(): Vendor[]
+}
+
+CallFireBrigade  -[#008200,dashed]-^  Action          
+CallPolice       -[#008200,dashed]-^  Action          
+Composite        -[#008200,dashed]-^  Component       
+Composite       "1" *-[#595959,plain]-> "children\n*" Component       
+Composite       "1" *-[#595959,plain]-> "level\n1" Level           
+Evacuate         -[#008200,dashed]-^  Action          
+MotionSensor     -[#000082,plain]-^  Sensor          
+Sensor          "1" *-[#595959,plain]-> "actions\n*" Action          
+Sensor           -[#008200,dashed]-^  Component       
+Sensor          "1" *-[#595959,plain]-> "vendor\n1" Vendor          
+SmokeSensor      -[#000082,plain]-^  Sensor          
+ToxicGasSensor  "1" *-[#595959,plain]-> "gasType\n1" GasType         
+ToxicGasSensor   -[#000082,plain]-^  Sensor          
+@enduml
