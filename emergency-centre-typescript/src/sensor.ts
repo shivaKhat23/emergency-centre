@@ -35,7 +35,7 @@ export default class Sensor implements Component {
 
   printInfo(): void {
     console.log(
-      `Sendor{id=${this.id}, vendor=${this.vendor}, type=${typeof this}}`
+      `Sendor{id=${this.id}, vendor=${this.vendor}, type=${this.constructor.name}}`
     );
   }
 

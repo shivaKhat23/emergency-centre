@@ -108,13 +108,13 @@ const gasSensor4: ToxicGasSensor = new ToxicGasSensor(
 
 const buildingSensor: MotionSensor = new MotionSensor(
   0,
-  Vendor.VENDOR1,
+  Vendor.VENDOR4,
   [evacuate, callFireBrigade],
   9,
   50
 );
 
-building.addChildren([floor1, floor2]);
+building.addChildren([floor1, floor2, buildingSensor]);
 floor1.addChildren([room1a, room1b]);
 floor2.addChildren([room2a, room2b]);
 room1a.addChildren([smokeSensor1, motionSensor1, gasSensor1]);
@@ -124,3 +124,43 @@ room2b.addChildren([smokeSensor4, motionSensor4, gasSensor4]);
 
 // execute the actions
 building.execute();
+
+// get all Sensors;
+const sensors = building.getSensors();
+
+// sort sensors by id
+console.log("sorting sensors by id");
+console.log("====================================");
+sensors
+  .sort((a, b) => a.getId() - b.getId())
+  .forEach((sensor) => sensor.printInfo());
+
+// sort sensors by vendor and then by id
+console.log("sorting sensors by vendor and then by id");
+console.log("====================================");
+sensors
+  .sort((a, b) => {
+    const vendorComparison = a.getVendor().localeCompare(b.getVendor());
+    if (vendorComparison === 0) {
+      return a.getId() - b.getId();
+    }
+    return vendorComparison;
+  })
+  .forEach((sensor) => sensor.printInfo());
+
+// sort sensors by type and then by vendor and then by id
+console.log("sorting sensors by type and then by vendor and then by id");
+console.log("====================================");
+sensors
+  .sort((a, b) => {
+    const typeComparison = a.constructor.name.localeCompare(b.constructor.name);
+    if (typeComparison === 0) {
+      const vendorComparison = a.getVendor().localeCompare(b.getVendor());
+      if (vendorComparison === 0) {
+        return a.getId() - b.getId();
+      }
+      return vendorComparison;
+    }
+    return typeComparison;
+  })
+  .forEach((sensor) => sensor.printInfo());

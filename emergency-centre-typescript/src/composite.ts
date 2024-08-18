@@ -1,5 +1,6 @@
 import Component from "./component";
 import { Level } from "./level";
+import Sensor from "./sensor";
 
 export default class Composite implements Component {
   private children: Component[] = [];
@@ -28,6 +29,18 @@ export default class Composite implements Component {
 
   getChidren(): Component[] {
     return this.children;
+  }
+
+  getSensors(): Sensor[] {
+    const sensors: Sensor[] = [];
+    for (let child of this.children) {
+      if (child instanceof Sensor) {
+        sensors.push(child);
+      } else if (child instanceof Composite) {
+        sensors.push(...child.getSensors());
+      }
+    }
+    return sensors;
   }
 
   execute(): void {
