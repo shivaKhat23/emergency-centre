@@ -3,9 +3,11 @@ import Composite from "./src/composite";
 import { GasType } from "./src/gas-type";
 import { Level } from "./src/level";
 import MotionSensor from "./src/motion-sensor";
+import Sensor from "./src/sensor";
 import SmokeSensor from "./src/smoke-sensor";
 import ToxicGasSensor from "./src/toxic-gas-sensor";
 import { Vendor } from "./src/vendor";
+import { sortBy } from "lodash";
 
 const evacuate: Evacuate = new Evacuate();
 const callFireBrigade: CallFireBrigade = new CallFireBrigade();
@@ -131,36 +133,23 @@ const sensors = building.getSensors();
 // sort sensors by id
 console.log("sorting sensors by id");
 console.log("====================================");
-sensors
-  .sort((a, b) => a.getId() - b.getId())
-  .forEach((sensor) => sensor.printInfo());
+sortBy(sensors, (sensor) => sensor.getId()).forEach((sensor) =>
+  sensor.printInfo()
+);
 
 // sort sensors by vendor and then by id
 console.log("sorting sensors by vendor and then by id");
 console.log("====================================");
-sensors
-  .sort((a, b) => {
-    const vendorComparison = a.getVendor().localeCompare(b.getVendor());
-    if (vendorComparison === 0) {
-      return a.getId() - b.getId();
-    }
-    return vendorComparison;
-  })
-  .forEach((sensor) => sensor.printInfo());
+sortBy(sensors, [
+  (sensor) => sensor.getVendor(),
+  (sensor) => sensor.getId(),
+]).forEach((sensor) => sensor.printInfo());
 
 // sort sensors by type and then by vendor and then by id
 console.log("sorting sensors by type and then by vendor and then by id");
 console.log("====================================");
-sensors
-  .sort((a, b) => {
-    const typeComparison = a.constructor.name.localeCompare(b.constructor.name);
-    if (typeComparison === 0) {
-      const vendorComparison = a.getVendor().localeCompare(b.getVendor());
-      if (vendorComparison === 0) {
-        return a.getId() - b.getId();
-      }
-      return vendorComparison;
-    }
-    return typeComparison;
-  })
-  .forEach((sensor) => sensor.printInfo());
+sortBy(sensors, [
+  (sensor) => sensor.constructor.name,
+  (sensor) => sensor.getVendor(),
+  (sensor) => sensor.getId(),
+]).forEach((sensor) => sensor.printInfo());
