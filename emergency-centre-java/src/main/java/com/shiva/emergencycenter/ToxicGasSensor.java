@@ -4,17 +4,17 @@ import java.util.List;
 import java.util.Objects;
 
 public class ToxicGasSensor extends Sensor {
-    private final Double Concentration;
+    private final Double concentration;
     private final GasType gasType;
 
     public ToxicGasSensor(Integer id, Vendor vendor, List<Action> actions, Double concentration, GasType gasType) {
         super(id, vendor, actions);
-        Concentration = concentration;
+        this.concentration = concentration;
         this.gasType = gasType;
     }
 
     public Double getConcentration() {
-        return Concentration;
+        return concentration;
     }
 
     public GasType getGasType() {
@@ -27,18 +27,18 @@ public class ToxicGasSensor extends Sensor {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         ToxicGasSensor that = (ToxicGasSensor) o;
-        return Objects.equals(Concentration, that.Concentration) && gasType == that.gasType;
+        return Objects.equals(concentration, that.concentration) && gasType == that.gasType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), Concentration, gasType);
+        return Objects.hash(super.hashCode(), concentration, gasType);
     }
 
     @Override
     public String toString() {
         return "ToxicGasSensor{" +
-                "Concentration=" + Concentration +
+                "Concentration=" + concentration +
                 ", gasType=" + gasType +
                 "} " + super.toString();
     }

@@ -1,13 +1,12 @@
-import { Evacuate, CallFireBrigade, CallPolice } from "./src/action";
+import { sortBy } from "lodash";
+import { CallFireBrigade, CallPolice, Evacuate } from "./src/action";
 import Composite from "./src/composite";
 import { GasType } from "./src/gas-type";
 import { Level } from "./src/level";
 import MotionSensor from "./src/motion-sensor";
-import Sensor from "./src/sensor";
 import SmokeSensor from "./src/smoke-sensor";
 import ToxicGasSensor from "./src/toxic-gas-sensor";
 import { Vendor } from "./src/vendor";
-import { sortBy } from "lodash";
 
 const evacuate: Evacuate = new Evacuate();
 const callFireBrigade: CallFireBrigade = new CallFireBrigade();
