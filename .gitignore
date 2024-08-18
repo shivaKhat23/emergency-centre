@@ -320,5 +320,5 @@ dist
 # End of https://www.toptal.com/developers/gitignore/api/maven,intellij,visualstudiocode,java,node
 
 
-emergency-centre-typescript/*.js
+emergency-centre-typescript/**/*.js
 emergency-centre-typescript/package-lock.json
