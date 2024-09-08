@@ -1,31 +1,46 @@
-﻿namespace emergency_centre
+﻿namespace EmergencyCentre;
+class Composite(string name, Level level) : IComponent
 {
-    internal class Composite
+    private readonly string name = name;
+    private readonly Level level = level;
+
+    private readonly List<IComponent> children = [];
+
+    public void Add(List<IComponent> components)
     {
-        private string name { get; }
-        private Level level { get; }
-
-        private List<Component> components = new List<Component>();
-        public Composite(string name, Level level)
+        foreach (var component in components)
         {
-            this.name = name;
-            this.level = level;
+            Add(component);
         }
+    }
 
-        public void Add(List<Component> components)
+    public void Add(IComponent component)
+    {
+        if (children.Contains(component))
         {
-            foreach(var component in components)
-            {
-                components.Add(component);
-            }
+            return;
         }
+        children.Add(component);
+    }
 
-        public void Add(Component component)
-        {
-            if (!components.Contains(component))
-            {
-                components.Add(component);
-            }
-        }
+    public void Remove(IComponent component)
+    {
+        children.Remove(component);
+    }
+
+    public List<IComponent> GetChildren()
+    {
+        return children;
+    }
+
+    public override string ToString()
+    {
+        return $"Composite{{name='{name}', level={level}}}";
+    }
+
+    public void Execute()
+    {
+        Console.WriteLine(this);
+        GetChildren().ForEach(component => component.Execute());
     }
 }

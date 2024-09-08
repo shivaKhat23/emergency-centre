@@ -1,7 +1,6 @@
-﻿namespace emergency_centre
+﻿namespace EmergencyCentre;
+
+enum Level
 {
-    enum Level
-    {
-        BUILDING, FLOOR, ROOM
-    }
+    BUILDING, FLOOR, ROOM
 }

@@ -1,2 +1,6 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿
+using EmergencyCentre;
+
+Composite building1 = new Composite("Building1", Level.BUILDING);
+building1.Execute();
+

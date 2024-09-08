@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace emergency_centre
+namespace EmergencyCentre;
+
+interface IComponent
 {
-    internal interface Component
-    {
-        void execute();
-    }
+    void Execute();
 }
