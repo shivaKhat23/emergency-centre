@@ -3,7 +3,7 @@ using EmergencyCentreDotNet.EmergencyCentre.Action;
 
 namespace EmergencyCentreDotNet.EmergencyCentre;
 
-public class MotionSensor(int id, Vendor vendor, List<IAction> actions, int minDistance, int maxDistance) : Sensor(id, vendor, actions)
+public class MotionSensor(int id, Vendor vendor, List<SensorAction> actions, int minDistance, int maxDistance) : Sensor(id, vendor, actions)
 {
 
     public int MinDistance { get; private set; } = minDistance;
