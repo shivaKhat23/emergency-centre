@@ -28,6 +28,23 @@ class Composite(string name, Level level) : IComponent
         Children.Remove(component);
     }
 
+    public HashSet<Sensor> GetSensors()
+    {
+        HashSet<Sensor> sensors = [];
+        foreach (var child in Children)
+        {
+            if (child is Sensor s)
+            {
+                sensors.Add(s);
+            }
+            else if (child is Composite c)
+            {
+                sensors.UnionWith(c.GetSensors());
+            }
+        }
+        return sensors;
+    }
+
     public override string ToString()
     {
         return $"Composite{{name='{Name}', level={Level}}}";

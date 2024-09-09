@@ -23,6 +23,7 @@ public abstract class Sensor(int id, Vendor vendor, List<Action> actions) : ICom
     public void Execute()
     {
         Console.WriteLine(this);
+        // Invoke can also be used: for e.g. action.Invoke()
         Actions.ForEach(action => action());
     }
 

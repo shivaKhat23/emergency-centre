@@ -1,6 +1,13 @@
 ﻿
 using EmergencyCentreDotNet.EmergencyCentre;
 
+// can use custom delegate as well 
+// for e.g. 
+// public delegate void SensorAction();
+// SensorAction evacuate = () => Console.WriteLine("Evacuate the building!!!!");
+
+// Built-In delegates: Action, Action<T>, Func<TResult>, Func<T, TResult> and Predicate<T>
+
 Action evacuate = () => Console.WriteLine("Evacuate the building!!!!");
 Action callPolice = () => Console.WriteLine("Call the Police!!!!");
 Action callFireBrigade = () => Console.WriteLine("Call the Fire Brigade!!!!");
@@ -41,3 +48,32 @@ room2b.Add([smokeSensor4, motionSensor4, gasSensor4]);
 //test Actions
 building1.Execute();
 
+var sensors = building1.GetSensors();
+
+
+List<Sensor> sensorsSortedById = sensors
+        .OrderBy(s => s.Id)
+        .ToList();
+
+Console.WriteLine("Sensors: Sorted by Id");
+sensorsSortedById.ForEach(s => s.PrintInfo());
+
+
+List<Sensor> sensorsSortedByVendorAndId = sensors
+        .OrderBy(s => s.Vendor)
+        .ThenBy(s => s.Id)
+        .ToList();
+
+Console.WriteLine("\n");
+Console.WriteLine("Sensors: Sorted by vendor then Id");
+sensorsSortedByVendorAndId.ForEach(s => s.PrintInfo());
+
+List<Sensor> sensorsSortedByTypeAndVendorAndId = sensors
+        .OrderBy(s => s.GetType().Name)
+        .ThenBy(s => s.Vendor)
+        .ThenBy(s => s.Id)
+        .ToList();
+
+Console.WriteLine("\n");
+Console.WriteLine("Sensors: Sorted by type then vendor then Id");
+sensorsSortedByTypeAndVendorAndId.ForEach(s => s.PrintInfo());
