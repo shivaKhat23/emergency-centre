@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "emergency-centre-c#": {
+      "commandName": "Project"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    }
+  }
+}
