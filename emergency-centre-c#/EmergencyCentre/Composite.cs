@@ -1,10 +1,10 @@
-﻿namespace EmergencyCentre;
+﻿namespace EmergencyCentreDotNet.EmergencyCentre;
 class Composite(string name, Level level) : IComponent
 {
-    private readonly string name = name;
-    private readonly Level level = level;
+    public string Name { get; private set; } = name;
+    public Level Level { get; private set; } = level;
 
-    private readonly List<IComponent> children = [];
+    public List<IComponent> Children { get; private set; } = [];
 
     public void Add(List<IComponent> components)
     {
@@ -16,31 +16,28 @@ class Composite(string name, Level level) : IComponent
 
     public void Add(IComponent component)
     {
-        if (children.Contains(component))
+        if (Children.Contains(component))
         {
             return;
         }
-        children.Add(component);
+        Children.Add(component);
     }
 
     public void Remove(IComponent component)
     {
-        children.Remove(component);
-    }
-
-    public List<IComponent> GetChildren()
-    {
-        return children;
+        Children.Remove(component);
     }
 
     public override string ToString()
     {
-        return $"Composite{{name='{name}', level={level}}}";
+        return $"Composite{{name='{Name}', level={Level}}}";
     }
 
     public void Execute()
     {
         Console.WriteLine(this);
-        GetChildren().ForEach(component => component.Execute());
+        Children.ForEach(component => component.Execute());
     }
+
+
 }
