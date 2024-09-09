@@ -1,4 +1,5 @@
-﻿namespace EmergencyCentreDotNet.EmergencyCentre;
+﻿
+namespace EmergencyCentreDotNet.EmergencyCentre;
 class Composite(string name, Level level) : IComponent
 {
     public string Name { get; private set; } = name;
@@ -56,5 +57,15 @@ class Composite(string name, Level level) : IComponent
         Children.ForEach(component => component.Execute());
     }
 
+    public override bool Equals(object? obj)
+    {
+        return obj is Composite composite &&
+               Name == composite.Name &&
+               Level == composite.Level;
+    }
 
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Name, Level);
+    }
 }

@@ -38,4 +38,16 @@ public abstract class Sensor(int id, Vendor vendor, List<Action> actions) : ICom
     {
         return $"Sensor(id: {Id}, vendor: {Vendor})";
     }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is Sensor sensor &&
+               Id == sensor.Id &&
+               Vendor == sensor.Vendor;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Id, Vendor);
+    }
 }
