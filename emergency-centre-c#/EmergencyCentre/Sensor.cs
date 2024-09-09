@@ -1,14 +1,12 @@
-using EmergencyCentreDotNet.EmergencyCentre.Action;
-
 namespace EmergencyCentreDotNet.EmergencyCentre;
 
-public abstract class Sensor(int id, Vendor vendor, List<SensorAction> actions) : IComponent
+public abstract class Sensor(int id, Vendor vendor, List<Action> actions) : IComponent
 {
     public int Id { get; private set; } = id;
     public Vendor Vendor { get; private set; } = vendor;
-    public List<SensorAction> Actions { get; private set; } = actions;
+    public List<Action> Actions { get; private set; } = actions;
 
-    public void AddAction(SensorAction action)
+    public void AddAction(Action action)
     {
         if (Actions.Contains(action))
         {
@@ -17,7 +15,7 @@ public abstract class Sensor(int id, Vendor vendor, List<SensorAction> actions) 
         Actions.Add(action);
     }
 
-    public void RemoveAction(SensorAction action)
+    public void RemoveAction(Action action)
     {
         Actions.Remove(action);
     }
@@ -25,7 +23,7 @@ public abstract class Sensor(int id, Vendor vendor, List<SensorAction> actions) 
     public void Execute()
     {
         Console.WriteLine(this);
-        Actions.ForEach(action => action.Invoke());
+        Actions.ForEach(action => action());
     }
 
     public void PrintInfo()

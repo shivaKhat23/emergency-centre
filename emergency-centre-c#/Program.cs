@@ -1,10 +1,9 @@
 ﻿
 using EmergencyCentreDotNet.EmergencyCentre;
-using EmergencyCentreDotNet.EmergencyCentre.Action;
 
-SensorAction evacuate = () => Console.WriteLine("Evacuate the building!!!!");
-SensorAction callPolice = () => Console.WriteLine("Call the Police!!!!");
-SensorAction callFireBrigade = () => Console.WriteLine("Call the Fire Brigade!!!!");
+Action evacuate = () => Console.WriteLine("Evacuate the building!!!!");
+Action callPolice = () => Console.WriteLine("Call the Police!!!!");
+Action callFireBrigade = () => Console.WriteLine("Call the Fire Brigade!!!!");
 
 Composite building1 = new("Building1", Level.BUILDING);
 Composite floor1 = new("Floor1", Level.FLOOR);
